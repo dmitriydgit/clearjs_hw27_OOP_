@@ -37,19 +37,25 @@ LoginForm.prototype = {
         }
     },
     showPersonPage : function () {
-        this.validator.showHide(this.DOMElements.gallery,"show");
-        this.validator.showHide(this.DOMElements.personNavbar,"show");
-        this.validator.showHide(this.DOMElements.backBtn,"show");
-        this.validator.showHide(this.DOMElements.form, "hide");
+        let array = [
+            {"show" : [this.DOMElements.gallery , this.DOMElements.personNavbar,
+            this.DOMElements.backBtn]},
+            {"hide" :  [this.DOMElements.form]}
+        ]
+        this.validator.showHide1(array);
         this.DOMElements.showGalleryBtn.classList.add("btn", "btn-outline-secondary");
         this.DOMElements.showUserDataBtn.classList.remove("btn", "btn-outline-secondary");
     },
     hidePersonPage : function(){
-        this.validator.showHide(this.DOMElements.personPage,"hide");
-        this.validator.showHide(this.DOMElements.gallery,"hide");
-        this.validator.showHide(this.DOMElements.personNavbar,"hide");
-        this.validator.showHide(this.DOMElements.backBtn,"hide");
-        this.validator.showHide(this.DOMElements.form,"show");
+        let array = [
+            {"hide" : [this.DOMElements.personPage,
+                        this.DOMElements.gallery, 
+                        this.DOMElements.personNavbar,
+                        this.DOMElements.backBtn] 
+            },
+            {"show" :  [this.DOMElements.form]}
+        ]
+        this.validator.showHide1(array);
     },
     initListeners : function () {
         this.DOMElements.form.addEventListener("keypress", this.initValidation.bind(this));
@@ -89,11 +95,14 @@ LoginForm.prototype = {
     },
     goBack : function () {
         this.hidePersonPage();
-        this.gallery.clearGallery(); // можно включитьчтобы обновлять галерею при входе
+        this.gallery.clearGallery(); // можно включить чтобы обновлять галерею при входе
         this.fillStartPageUserData();   
         localStorage.userLoggedIn = 0;
         localStorage.isGalleryInited = "1";
         localStorage.sortMethod = "0";
+        /*localStorage.removeItem("email");
+        localStorage.removeItem  = "password";*/
+
     },
 	fillStartPageUserData : function() {
         if (this.DOMElements.checkBoxRemememberMe.checked == true){
@@ -116,14 +125,20 @@ LoginForm.prototype = {
 		}
 	},
     showGalleryBlock: function() {
-        this.validator.showHide(this.DOMElements.gallery,"show");
-        this.validator.showHide(this.DOMElements.personPage,"hide");
+        let array = [
+            {"hide" : [this.DOMElements.personPage]},
+            {"show" :  [this.DOMElements.gallery]}
+        ]
+        this.validator.showHide1(array);
         this.DOMElements.showGalleryBtn.classList.add("btn", "btn-outline-secondary");
         this.DOMElements.showUserDataBtn.classList.remove("btn", "btn-outline-secondary");
     },
     showUserDataBlock: function() {
-        this.validator.showHide(this.DOMElements.personPage,"show");
-        this.validator.showHide(this.DOMElements.gallery,"hide");
+        let array = [
+            {"show" : [this.DOMElements.personPage]},
+            {"hide" :  [this.DOMElements.gallery]}
+        ]
+        this.validator.showHide1(array);
         this.DOMElements.showUserDataBtn.classList.add("btn", "btn-outline-secondary");
         this.DOMElements.showGalleryBtn.classList.remove("btn", "btn-outline-secondary");
     },

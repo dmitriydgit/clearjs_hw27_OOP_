@@ -28,19 +28,23 @@ Validator.prototype = {
     },
     checkFields (email, pass){
         if ( !email) {
-            this.showHide(this.DOMEls.notFilledEmailMsg , "show")
+            let array = [{"show" : [this.DOMEls.notFilledEmailMsg]}]
+            this.showHide1(array);
             return false;
         }
         if ( !pass) {
-            this.showHide(this.DOMEls.notFilledPassMsg , "show")
+            let array = [{"show" : [this.DOMEls.notFilledPassMsg]}]
+            this.showHide1(array);
             return false;
         }
         if ( !this.checkEmail(email)) {
-            this.showHide(this.DOMEls.wrongEmailMsg , "show")
+            let array = [{"show" : [this.DOMEls.wrongEmailMsg]}];
+            this.showHide1(array);
             return false;
         }
         if ( !this.checkPassword(pass)) {
-            this.showHide(this.DOMEls.wrongPassMsg , "show")
+            let array = [{"show" : [this.DOMEls.wrongPassMsg]}];
+            this.showHide1(array);
             return false;
         }
         return true;
@@ -51,18 +55,33 @@ Validator.prototype = {
             return true;
         } else {
             this.print("incorrect");
-            this.showHide(this.DOMEls.alertMsg , "show");
+            let array = [{ "show" : [this.DOMEls.alertMsg]}]
+            this.showHide1(array);
             return false;
         }
     },
     hideAlertMsgs(){
-        this.showHide(this.DOMEls.alertMsg , "hide");
-        this.showHide(this.DOMEls.notFilledEmailMsg , "hide")
-        this.showHide(this.DOMEls.notFilledPassMsg , "hide")
-        this.showHide(this.DOMEls.wrongEmailMsg , "hide")
-        this.showHide(this.DOMEls.wrongPassMsg , "hide")
+        let array = [{"hide" : [this.DOMEls.alertMsg,
+                                this.DOMEls.notFilledEmailMsg, 
+                                this.DOMEls.notFilledPassMsg,
+                                this.DOMEls.wrongEmailMsg,
+                                this.DOMEls.wrongPassMsg]}
+        ];
+        this.showHide1(array);
     },
-    showHide(elem, action){    
+    showHide1(array){    
+        array.forEach(object => { 
+        for(var key in object) { 
+            var key = key;
+            var value = object[key]; 
+            value.forEach(DOMElem => {
+                    DOMElem.classList.remove("show" , "hide");
+                    DOMElem.classList.add(key);
+                })
+            }
+        })
+    },
+     /*showHide(elem, action){    
         if(elem.classList.contains("show")){
             elem.classList.remove("show");
         }
@@ -70,7 +89,7 @@ Validator.prototype = {
             elem.classList.remove("hide");
         }
         elem.classList.add(action);
-    },
+    },*/
     showHidePass(elem, type){                                          
         elem.setAttribute('type', type);
     },

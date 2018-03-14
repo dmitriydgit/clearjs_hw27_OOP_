@@ -24,8 +24,8 @@ LoginForm.prototype = {
         this.initTooltips();
     },
     setLogAndPass : function(obj) {
-        localStorage.email = obj.email;
-        localStorage.password = obj.password;
+        localStorage.setItem ("email" , obj.email);
+        localStorage.setItem ("password" , obj.password);
         localStorage.isGalleryInited = "0";
     },
     checkIfUserLoggedIn : function(){
@@ -97,9 +97,9 @@ LoginForm.prototype = {
         this.hidePersonPage();
         this.gallery.clearGallery(); // можно включить чтобы обновлять галерею при входе
         this.fillStartPageUserData();   
-        localStorage.userLoggedIn = 0;
-        localStorage.isGalleryInited = "1";
-        localStorage.sortMethod = "0";
+        localStorage.setItem("userLoggedIn","0");
+        localStorage.setItem("isGalleryInited" , "1");
+        localStorage.setItem("sortMethod" , "0");
         /*localStorage.removeItem("email");
         localStorage.removeItem  = "password";*/
 

@@ -7,6 +7,7 @@
 
 
 
+
 let LoginForm = function (validatorModule , galleryModule , obj) {	
 	this.validator = validatorModule;
     this.gallery = galleryModule;

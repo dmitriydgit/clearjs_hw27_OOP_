@@ -15,7 +15,7 @@ let BaseGallery = function () {
 }
 
 BaseGallery.prototype = {
-    init: function(){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    init: function(){                                                 
         this.initListeners();
         this.prepareData();
     },     
@@ -24,8 +24,8 @@ BaseGallery.prototype = {
     },
     prepareData : function() {
         this.DOMElements.sortBlock.value = localStorage.sortMethod ? localStorage.sortMethod : "0";
-        this.readyDataForGallery = data.map((item, index) => {                 //creating array after loading
-            return {
+        this.readyDataForGallery = data.map((item, index) => {                 
+					return {
                     url: item.url,
                     name: item.name,
                     description: item.description,
@@ -59,11 +59,10 @@ BaseGallery.prototype = {
         }
         this.reBuildGallery(this.visibleData);
     },
-    
     reBuildGallery : function(array){
         this.DOMElements.resultBlock.innerHTML = "";
         for (let i = 0; i < array.length; i++) {    
-            this.DOMElements.resultBlock.innerHTML += this.galleryItem(array[i], i+1);
+            this.DOMElements.resultBlock.innerHTML += this.galleryItem(array[i], i+1); //i +1 для номера изображения кот динамически
         }
         this.imageCounter = array.length;
         this.DOMElements.counter.innerHTML = this.imageCounter;

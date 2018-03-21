@@ -62,7 +62,7 @@ BaseGallery.prototype = {
     reBuildGallery : function(array){
         this.DOMElements.resultBlock.innerHTML = "";
         for (let i = 0; i < array.length; i++) {    
-            this.DOMElements.resultBlock.innerHTML += this.galleryItem(array[i], i+1); //i +1 для номера изображения кот динамически
+            this.DOMElements.resultBlock.innerHTML += this.galleryItem(array[i], i+1); //i +1 для номера изображения кот динамически						
         }
         this.imageCounter = array.length;
         this.DOMElements.counter.innerHTML = this.imageCounter;
@@ -121,7 +121,7 @@ BaseGallery.prototype = {
 };
 
 //  let baseGallery = new BaseGallery();
-//  baseGallery.init();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+//  baseGallery.init();   
 
 let ExtendedGallery = function() {
     BaseGallery.apply(this);
